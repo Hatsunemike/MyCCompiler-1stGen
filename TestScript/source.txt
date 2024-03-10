@@ -1,0 +1,22 @@
+mov DWORD PTR [ebp-4], 0
+mov DWORD PTR [ebp-8], 0
+mov DWORD PTR [ebp-12], 0
+mov eax,1
+push eax
+pop eax
+mov DWORD PTR [ebp-4], eax
+mov eax,2
+push eax
+pop eax
+mov DWORD PTR [ebp-8], eax
+push DWORD PTR [ebp-4]
+push DWORD PTR [ebp-8]
+pop ebx
+pop eax
+add eax, ebx
+push eax
+pop eax
+mov DWORD PTR [ebp-12], eax
+push DWORD PTR [ebp-12]
+pop eax
+ret

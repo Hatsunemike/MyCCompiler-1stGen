@@ -69,7 +69,6 @@ void GenInt(ifstream& rd_stream) {
 void GenReturn(ifstream &rd_stream)
 {
     GenExpr(rd_stream);
-    printf("ret\n");
 }
 
 void GenCalcOnce(char op){
@@ -104,7 +103,8 @@ void GenExpr(ifstream &rd_stream)
             end_flag = true;
         }
         else if((const_flag = isConst(word)) || isIden(word)) {
-            printf("mov eax,%s\npush eax\n",word.c_str());
+            if(const_flag)printf("mov eax,%s\npush eax\n",word.c_str());
+            else printf("push DWORD PTR [ebp-%d]\n",rk[word[0]]*4);
             continue;
         }
         else if(isOper(word[0])) {
@@ -114,10 +114,14 @@ void GenExpr(ifstream &rd_stream)
         while(!op.empty()) {
             op2 = op.top();op.pop();
             op1 = op.top();
+            if(op2 == '(') {
+                op.push(op2);
+                break;
+            }
             if(op2 == ')') {
                 if(op1 == '(') {
                     op.pop();
-                    continue;
+                    break;
                 }
                 GenCalcOnce(op1);
                 op.pop();
@@ -146,7 +150,7 @@ void GenExpr(ifstream &rd_stream)
 
 int main(int argc,char* argv[]) {
     string rd_file = (argc > 1)?argv[1]:"stdin";
-    cout << "rd_file: " << rd_file << endl;
+//    cout << "rd_file: " << rd_file << endl;
     ifstream rd_stream;
     rd_stream.open(rd_file);
     string word;
