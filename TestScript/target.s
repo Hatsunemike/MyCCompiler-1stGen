@@ -30,7 +30,6 @@ pop eax
 mov DWORD PTR [ebp-12], eax
 push DWORD PTR [ebp-12]
 pop eax
-ret
  # 打印 d (当前 eax 的值)
  push eax # 将结果 (eax 的值) 作为 printf 的参数
  push offset format_str # 将格式字符串的地址作为 printf 的参数

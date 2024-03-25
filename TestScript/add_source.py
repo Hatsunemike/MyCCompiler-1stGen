@@ -1,6 +1,6 @@
-temp_file = open("./Template.asm",encoding = "utf-8",mode = "r")
+temp_file = open("./Template.s",encoding = "utf-8",mode = "r")
 src_file  = open("./source.txt",  encoding = "utf-8",mode = "r")
-tgt_file  = open("./target.asm",  encoding = "utf-8",mode = "w")
+tgt_file  = open("./target.s",  encoding = "utf-8",mode = "w")
 
 while (True):
     my_str = temp_file.readline()

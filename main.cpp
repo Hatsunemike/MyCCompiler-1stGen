@@ -152,7 +152,10 @@ int main(int argc,char* argv[]) {
     string rd_file = (argc > 1)?argv[1]:"stdin";
 //    cout << "rd_file: " << rd_file << endl;
     ifstream rd_stream;
-    rd_stream.open(rd_file);
+    if(rd_file != "stdin")rd_stream.open(rd_file);
+    else {
+        cerr << "RunTime: 已输入定向到命令行." << endl;
+    }
     string word;
     while( true ) {
         word.clear();
